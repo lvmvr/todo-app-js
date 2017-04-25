@@ -86,7 +86,7 @@ header button {
      -moz-appearance: none;
       -ms-appearance: none;
        -o-appearance: none;
-          appearance: none; /* Allows an element to appear as a standard UI element (ex: div look like a btn) */
+          appearance: none; /* to display an element using a platform-native styling based on the operating system's theme */
 }
 
 header button svg {
@@ -134,10 +134,10 @@ ul.todo li{
   border-radius: 5px;
   box-shadow: 0 1px 2px rgba(44, 62, 80, 0.10);
   margin: 0 0 10px 0;
-  padding: 14px 100px 0 14px; /* 50px - 22px / 2 = 14px (centers it from the top) */
+  padding: 14px 100px 0 14px; /* 50px - 22px / 2 = 14px (just centers it from the top and bottom) */
 }
 
-ul.todo li:last-of-type {
+ul.todo li:last-of-type { /* Last list item will not have a bottom margin */
   margin: 0;
 }
 
@@ -171,7 +171,7 @@ ul.todo li .buttons button:last-of-type:before { /* Adds border in between both 
   width: 1px;
   height: 30px;
   position: absolute;
-  top: 10px;
+  top: 10px; /* Accomodates for 10px on bottom, 50px total incl height */
   left: 0;
   background: #edf0f1;
 }
@@ -179,39 +179,36 @@ ul.todo li .buttons button:last-of-type:before { /* Adds border in between both 
 ul.todo li .buttons button svg {
   width: 22px;
   height: 22px;
-  position: absolute;
+  position: absolute; /* Small hack to center elements, ends at margin property */
   top: 50%;
   left: 50%;
   margin: -11px 0 0 -11px;
 }
 
-
-/* JS-injected styles based on events */
 ul.todo li .buttons button.complete svg {
   border-radius: 11px;
   border: 1.5px solid #25b99a;
   transition: background 0.2s ease;
 }
 
+/* JS-injected styles based on events */
 ul.todo#completed li .buttons button.complete svg {
   background: #25b99a;
   border: 0px;
 
 }
 
+ul.todo#completed li .buttons button.complete svg .fill {
+  fill: #fff;
+}
+
 ul.todo:not(#completed) li .buttons button.complete:hover svg {
-  background: rgba(37, 185, 154, 0.75);
+  background: rgba(37, 185, 154, 0.75); /* Slightly dimmer green from fully completed */
 }
 
 ul.todo:not(#completed) li .buttons button.complete:hover svg .fill {
   fill: #fff;
 }
-
-ul.todo#completed li .buttons button.complete svg .fill {
-  fill: #fff;
-}
-
-
 
 ul.todo li .buttons button svg .fill {
   -webkit-transition: fill 0.2s ease;
@@ -230,7 +227,7 @@ ul.todo li .buttons button.complete svg .fill {
 }
 
 ul.todo li .buttons button.remove:hover svg .fill {
-  fill: #e85656;
+  fill: #e85656; /* Red color*/
 }
 
 
