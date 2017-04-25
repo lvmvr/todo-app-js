@@ -18,6 +18,16 @@ function removeItem() {
     parent.removeChild(item);
 }
 
+function completeItem() {
+    var item = this.parentNode.parentNode;
+    var parent = item.parentNode;
+    var id = parent.id;
+
+    // Check if the item should be added to completed list OR to be re-added to the todo list
+    var target = (id === 'todo') ? document.getElementById('completed') : document.getElementById('todo');
+    parent.removeChild(item);
+    target.insertBefore(item, target.childNodes[0]);
+}
 // Adds new items to to-do list
 function addItemTodo(text) {
     // Create the necessary HTML as before with the uncompleted tasks
@@ -39,6 +49,9 @@ function addItemTodo(text) {
     var complete = document.createElement('button');
     complete.classList.add('complete');
     complete.innerHTML = completeSVG;
+
+    // Add event listener for completing items
+    complete.addEventListener('click', completeItem);
 
     buttons.appendChild(remove);
     buttons.appendChild(complete);
