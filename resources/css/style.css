@@ -141,7 +141,7 @@ ul.todo li:last-of-type { /* Last list item will not have a bottom margin */
   margin: 0;
 }
 
-ul.todo li .buttons {
+ul.todo li .buttons { /* Div container for actual buttons */ 
   width: 100px;
   height: 50px;
   position: absolute;

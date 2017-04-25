@@ -5,8 +5,18 @@ var completeSVG = '<svg style="enable-background:new 0 0 22 22"version=1.1 viewB
 // User will click on the 'Add' button
 document.getElementById('add').addEventListener('click', function() {
   var value = document.getElementById('item').value;
-  if (value) addItemTodo(value);
+  if (value) {
+    addItemTodo(value); // If there is an item present, run the function below.
+    document.getElementById('item').value = '';
+  } 
 });
+
+function removeItem() {
+    var item = this.parentNode.parentNode; // Check the console to see the node tree
+    var parent = item.parentNode; // Is there a better way to target this?
+
+    parent.removeChild(item);
+}
 
 // Adds new items to to-do list
 function addItemTodo(text) {
@@ -23,6 +33,9 @@ function addItemTodo(text) {
     remove.classList.add('remove');
     remove.innerHTML = removeSVG;
 
+    // Add event listener for removing items
+    remove.addEventListener('click', removeItem);
+
     var complete = document.createElement('button');
     complete.classList.add('complete');
     complete.innerHTML = completeSVG;
@@ -31,5 +44,6 @@ function addItemTodo(text) {
     buttons.appendChild(complete);
     item.appendChild(buttons);
 
-    list.appendChild(item);
+    // list.appendChild(item);
+    list.insertBefore(item, list.childNodes[0]); // Inserts new <li> before the first (or 'currently' first) child of <ul>
 }
